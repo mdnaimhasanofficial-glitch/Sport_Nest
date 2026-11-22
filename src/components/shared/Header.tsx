@@ -1,8 +1,25 @@
-"use client";
-
+import { authClient } from "@/lib/auth-client";
+import { headers } from "next/headers";
 import Link from "next/link";
+import UserDropdown from "./UserDropdown";
 
-export function Header() {
+export async function Header() {
+  "use server";
+  const { data: session } = await authClient.getSession({
+    fetchOptions: {
+      headers: await headers(),
+    },
+  });
+  console.log({ user: session?.user });
+
+  const signOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        headers: await headers(),
+      },
+    });
+  };
+
   return (
     <header className="w-full bg-[#162A65] text-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-20 sm:px-6">
@@ -59,7 +76,13 @@ export function Header() {
             </svg>
           </Link>
 
-          <Link href={"/signin"}>SignIn</Link>
+          {session ? (
+            <UserDropdown user={session.user} />
+          ) : (
+            <Link href="/login" className="btn btn-primary">
+              SignIn
+            </Link>
+          )}
         </div>
       </div>
     </header>

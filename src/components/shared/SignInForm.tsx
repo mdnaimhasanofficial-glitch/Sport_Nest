@@ -1,19 +1,38 @@
 "use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { signIn } from "@/lib/auth-client";
+import { toast } from "../ui/toast";
 const SignInForm = () => {
+  const router = useRouter();
+
   async function handleSignIn(formData: FormData) {
     // const email = formData.get("email")?.toString().trim();
     // const password = formData.get("password")?.toString();
 
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
-    // if (!email || !password || password.length < 6) {
-    //   return;
-    // }
+    const values = Object.fromEntries(formData.entries());
 
-    // // এখানে আপনার email/password login লজিক বসাবেন
-    // console.log({ email, password });
+    const email = String(values.email || "").trim();
+    const password = String(values.password || "");
+
+    const { data, error } = await signIn.email({
+      email: email, // required, The email address of the user.
+      password: password, // required, The password of the user. It should be at least 8 characters long and max 128 by default.
+      rememberMe: true, // If false, the user will be signed out when the browser is closed. (optional) (default: true)
+      callbackURL: "/", // An optional URL to redirect to after the user signs in. (optional)
+    });
+
+    if (data?.user) {
+      toast.add({
+        title: "User Login Successfully!",
+        description: "User Login Successfully!",
+      });
+
+      router.push("/");
+    }
+
+    console.log({ data, error });
   }
 
   //   async function handleGoogleSignIn() {

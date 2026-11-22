@@ -3,7 +3,10 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { signUp } from "@/lib/auth-client";
+import { toast } from "../ui/toast";
+import { useRouter } from "next/navigation";
 const SignUpForm = () => {
+  const router = useRouter();
   //   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   //   const [passwordMismatch, setPasswordMismatch] = useState(false);
@@ -20,15 +23,18 @@ const SignUpForm = () => {
     const image = String(values.image || "").trim();
     const password = String(values.password || "");
 
-    const { data, error } = await signUp.email({
+    const { data } = await signUp.email({
       name: name,
       email: email,
       password: password,
       image: image || undefined,
       callbackURL: "/",
     });
-
-    console.log({ data, error });
+    toast.add({
+      title: `Hello (${data?.user}) Account Created`,
+      description: "Account created successfully!",
+    });
+    router.push("/login");
   };
 
   if (error) {

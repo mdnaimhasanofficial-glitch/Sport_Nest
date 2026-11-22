@@ -1,3 +1,5 @@
-export default function Home() {
-  return <>HomePage</>;
-}
+const RootLayoutPage = ({ children }: LayoutProps<"/">) => {
+  return <div>{children}</div>;
+};
+
+export default RootLayoutPage;
