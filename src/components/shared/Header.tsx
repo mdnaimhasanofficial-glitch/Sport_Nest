@@ -12,13 +12,13 @@ export async function Header() {
   });
   console.log({ user: session?.user });
 
-  const signOut = async () => {
-    await authClient.signOut({
-      fetchOptions: {
-        headers: await headers(),
-      },
-    });
-  };
+  // const signOut = async () => {
+  //   await authClient.signOut({
+  //     fetchOptions: {
+  //       headers: await headers(),
+  //     },
+  //   });
+  // };
 
   return (
     <header className="w-full bg-[#162A65] text-white">

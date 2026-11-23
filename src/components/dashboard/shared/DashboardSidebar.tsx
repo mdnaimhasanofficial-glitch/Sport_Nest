@@ -19,7 +19,7 @@ import {
   UserRound,
 } from "lucide-react";
 
-type UserRole = "user" | "admin" | "branchManager";
+type UserRole = "user" | "admin" | "branchmanager";
 
 interface DashboardSidebarProps {
   role: UserRole;
@@ -34,17 +34,17 @@ const roleBasedSidebarItems = {
     },
     {
       title: "My Booking",
-      href: "/user/booking",
+      href: "/user/dashboard/booking",
       icon: CalendarCheck,
     },
     {
       title: "Upcoming Bookings",
-      href: "/user/bookings/upcoming",
+      href: "/user/dashboard/upcoming",
       icon: CalendarDays,
     },
     {
       title: "My Profile",
-      href: "/user/profile",
+      href: "/user/dashboard/profile",
       icon: UserRound,
     },
   ],
@@ -57,32 +57,32 @@ const roleBasedSidebarItems = {
     },
     {
       title: "Bookings",
-      href: "/admin/bookings/upcoming",
+      href: "/admin/dashboard/bookings",
       icon: CalendarCheck,
     },
     {
       title: "Users",
-      href: "/admin/users",
+      href: "/admin/dashboard/users",
       icon: Users,
     },
     {
       title: "Branches",
-      href: "/admin/branches",
+      href: "/admin/dashboard/branches",
       icon: Building2,
     },
     {
       title: "Services",
-      href: "/admin/services",
+      href: "/admin/dashboard/services",
       icon: Droplets,
     },
     {
       title: "My Profile",
-      href: "/admin/profile",
+      href: "/admin/dashboard/profile",
       icon: UserRound,
     },
   ],
 
-  branchManager: [
+  branchmanager: [
     {
       title: "Dashboard",
       href: "/branchmanager/dashboard",
@@ -90,22 +90,22 @@ const roleBasedSidebarItems = {
     },
     {
       title: "Bookings",
-      href: "/branchmanager/bookings",
+      href: "/branchmanager/dashboard/bookings",
       icon: CalendarCheck,
     },
     {
       title: "Services",
-      href: "/branchmanager/services",
+      href: "/branchmanager/dashboard/services",
       icon: Droplets,
     },
     {
       title: "Upcoming Bookings",
-      href: "/branchmanager/bookings/upcoming",
+      href: "/branchmanager/dashboard/bookings/upcoming",
       icon: CalendarDays,
     },
     {
       title: "My Profile",
-      href: "/branchmanager/profile",
+      href: "/branchmanager/dashboard/profile",
       icon: UserRound,
     },
   ],
@@ -155,7 +155,7 @@ const DashboardSidebar = ({ role }: DashboardSidebarProps) => {
               <p className="text-xs text-gray-400">
                 {role === "admin"
                   ? "Admin Dashboard"
-                  : role === "branchManager"
+                  : role === "branchmanager"
                     ? "Branch Manager"
                     : "User Dashboard"}
               </p>

@@ -18,6 +18,8 @@ export default function UserDropdown({ user }: UserDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
+  const { data: session } = authClient.useSession();
+
   return (
     <div className="relative">
       <button
@@ -47,7 +49,7 @@ export default function UserDropdown({ user }: UserDropdownProps) {
             </div>
 
             <Link
-              href="/dashboard"
+              href={`/${session?.user.role}/dashboard`}
               onClick={() => setIsOpen(false)}
               className="block rounded-lg px-3 py-2 hover:bg-gray-100"
             >
